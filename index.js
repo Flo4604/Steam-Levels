@@ -69,15 +69,9 @@ for (let level = 0; level <= 5999; level++) {
         const shape = await loadImage(levelImages[Math.floor(level / 100)]);
 
         const y = Math.floor(level % 100 / 10) * 32;
-    
 
-        // load font
-        await ctx.font
-
-        // cut out the 32x32 protion of the shape we need
         ctx.drawImage(shape, 0, y, 32, 32, 0, 0, 32, 32);
 
-        // draw the image text in the middle of the canvas
         ctx.font = '14px Motiva Sans';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -90,15 +84,11 @@ for (let level = 0; level <= 5999; level++) {
             mkdirSync(path, { recursive: true });
         }
 
-        const buffer = canvas.toBuffer('image/png');
-
         console.log(`Writing ${level}`);
 
-        writeFileSync(`${path}/${level % 100}.png`, buffer);
+        writeFileSync(`${path}/${level % 100}.png`, canvas.toBuffer('image/png'));
     } catch (e) {
         console.log(`ERROR ${level}` ,e)
     }
 
 }
-
-// javascript create worker for each 1000 levels
